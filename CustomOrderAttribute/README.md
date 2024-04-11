@@ -11,7 +11,11 @@
 
 ## Main Functionalities
 Custom order attributes
+The custom attribute is added to the order table in the file
+CustomOrderAttribute/etc/db_schema.xml
 
+We listen for the event checkout_submit_all_after
+We then save the PO Number to the customer_reference we created in our db_schema.xml
 ## Installation
 \* = in production please use the `--keep-generated` option
 
@@ -22,28 +26,18 @@ Custom order attributes
  - Apply database updates by running `php bin/magento setup:upgrade`\*
  - Flush the cache by running `php bin/magento cache:flush`
 
-### Type 2: Composer
-
- - Make the module available in a composer repository for example:
-    - private repository `repo.magento.com`
-    - public repository `packagist.org`
-    - public github repository as vcs
- - Add the composer repository to the configuration by running `composer config repositories.repo.magento.com composer https://repo.magento.com/`
- - Install the module composer by running `composer require cavalier/module-customorderattribute`
- - enable the module by running `php bin/magento module:enable Cavalier_CustomOrderAttribute`
- - apply database updates by running `php bin/magento setup:upgrade`\*
- - Flush the cache by running `php bin/magento cache:flush`
 
 
 ## Configuration
 
-
+You need to enable Purchase Order Payment Method for this to work
 
 
 ## Specifications
 
- - Plugin
-	- afterAssignData - Magento\OfflinePayments\Model\Purchaseorder > Cavalier\CustomOrderAttribute\Plugin\Magento\OfflinePayments\Model\Purchaseorder
+  - Observer
+	- checkout_submit_all_after > Cavalier\CustomOrderAttribute\Observer\Checkout\SubmitAllAfter
+
 
 
 ## Attributes
